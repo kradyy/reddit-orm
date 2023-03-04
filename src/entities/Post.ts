@@ -1,51 +1,16 @@
+import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
+
 @Entity()
-export class Author {
+export class Post {
+  @PrimaryKey({ type: 'number'})
+  id!: number;
 
-  @PrimaryKey()
-  _id!: ObjectId;
+  @Property({ type: 'date', default: 'NOW()' })
+  createdAt? = new Date();
 
-  @SerializedPrimaryKey()
-  id!: string;
+  @Property({ type: 'date', onUpdate: () => new Date(), default: 'NOW()' })
+  updatedAt? = new Date();
 
-  @Property()
-  createdAt = new Date();
-
-  @Property({ onUpdate: () => new Date() })
-  updatedAt = new Date();
-
-  @Property()
-  name!: string;
-
-  @Property()
-  email!: string;
-
-  @Property()
-  age?: number;
-
-  @Property()
-  termsAccepted = false;
-
-  @Property()
-  identities?: string[];
-
-  @Property()
-  born?: Date;
-
-  @OneToMany(() => Book, book => book.author)
-  books = new Collection<Book>(this);
-
-  @ManyToMany()
-  friends = new Collection<Author>(this);
-
-  @ManyToOne()
-  favouriteBook?: Book;
-
-  @Property({ version: true })
-  version!: number;
-
-  constructor(name: string, email: string) {
-    this.name = name;
-    this.email = email;
-  }
-
+  @Property({ type: 'text'})
+  title!: string;
 }

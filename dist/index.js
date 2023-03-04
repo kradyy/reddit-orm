@@ -1,16 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@mikro-orm/core");
-const constants_1 = require("./constants");
+const orm_1 = require("./orm");
+const Post_1 = require("./entities/Post");
 const main = async () => {
-    const orm = await core_1.MikroORM.init({
-        dbName: "lireddit",
-        entities: [],
-        type: "postgresql",
-        user: 'postgres',
-        password: 'postgres',
-        debug: !constants_1.__prod__
+    const em = await (0, orm_1.entityManager)();
+    em.find(Post_1.Post, { title: "12345" }).then((posts) => {
+        console.log(posts);
     });
 };
-main();
+main().catch((error) => {
+    console.error(error);
+});
 //# sourceMappingURL=index.js.map

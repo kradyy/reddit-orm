@@ -7,15 +7,24 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.ts",
     "watch": "tsc -w",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "migrate:create": "mikro-orm migration:create",
+    "migrate:up": "mikro-orm migration:up",
+    "migrate:down": "mikro-orm migration:down"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^4.17.17",
     "@types/node": "^18.13.0",
+    "apollo-server-express": "^3.11.1",
+    "graphql": "^15.3.0",
+    "graphsql": "^0.0.0",
     "nodemon": "^2.0.20",
+    "reflect-metadata": "^0.1.13",
     "ts-node": "^10.9.1",
+    "type-graphql": "^1.1.1",
     "typescript": "^4.9.5"
   },
   "dependencies": {
@@ -23,6 +32,14 @@
     "@mikro-orm/core": "^5.6.9",
     "@mikro-orm/migrations": "^5.6.9",
     "@mikro-orm/postgresql": "^5.6.9",
+    "express": "^4.18.2",
     "pg": "^8.9.0"
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "configPaths": [
+      "./src/mikro-orm.config.ts",
+      "./dist/mikro-orm.config.js"
+    ]
   }
 }
